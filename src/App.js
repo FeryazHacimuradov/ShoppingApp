@@ -16,8 +16,8 @@ function App() {
     setQuery(event.target.value);
   };
 
-  const filteredItems = products.filter((product) =>
-    product.title.toLocaleLowerCase().indexOf(query.toLocaleLowerCase() !== -1)
+  const filteredItems = products.filter(
+    (product) => product.title.toLowerCase().indexOf(query.toLowerCase()) !== -1
   );
 
   const handleChange = (event) => {
@@ -28,7 +28,7 @@ function App() {
     setSelectedCategory(event.target.value);
   };
 
-  function filterData(products, selected, query) {
+  function filteredData(products, selected, query) {
     let filteredProducts = products;
 
     if (query) {
@@ -45,27 +45,30 @@ function App() {
           title === selected
       );
     }
+
     return filteredProducts.map(
-      ({ img, title, star, reviews, newPrice, prevPrice }) => {
+      ({ img, title, star, reviews, prevPrice, newPrice }) => (
         <Card
           key={Math.random()}
           img={img}
           title={title}
           star={star}
           reviews={reviews}
-          newPrice={newPrice}
           prevPrice={prevPrice}
-        />;
-      }
+          newPrice={newPrice}
+        />
+      )
     );
   }
 
+  const result = filteredData(products, selectedCategory, query);
+
   return (
     <>
-      <Sidebar />
-      <Navigation />;
-      <Recommended />
-      <Products />
+      <Sidebar handleChange={handleChange} />
+      <Navigation query={query} handleInputChange={handleInputChange} />
+      <Recommended handleClick={handleClick} />
+      <Products result={result} />
     </>
   );
 }

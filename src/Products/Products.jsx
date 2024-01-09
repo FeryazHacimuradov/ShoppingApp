@@ -1,16 +1,9 @@
-import Card from "../components/card/Card";
 import "./products.scss";
 
-export default function Products() {
+export default function Products({ result }) {
   return (
     <>
-      <section className="card-container">
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-      </section>
+      <section className="card-container">{result}</section>
     </>
   );
 }
